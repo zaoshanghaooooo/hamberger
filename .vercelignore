@@ -1,0 +1,8 @@
+# 只把最终静态产物发布出去，构建输入与脚本不对外暴露
+scripts/
+flyer/
+data/
+README.md
+.gitignore
+__pycache__/
+*.pyc
