@@ -399,6 +399,7 @@ def render_buylist(buylist, t, lang):
     out = []
     for g in groups:
         gname = g['name'].get(lang) or g['name'].get('zh') or ''
+        gshort = re.sub(r'[（(].*?[)）]', '', gname).strip() or gname[:8]
         out.append(f'<h3>{esc(gname)}</h3>')
         note = (g.get('note') or {})
         if note.get(lang) or note.get('zh'):
@@ -431,7 +432,7 @@ def render_buylist(buylist, t, lang):
             art_line = f'<div class="part">Art. {esc(art)}</div>' if art and art != '—' else ''
             out.append(
                 '<div class="pcard">'
-                f'<div class="pimg"><b>{esc(gname[:14])}</b><i>{"Art. " + esc(art) if art and art != "—" else "—"}</i></div>'
+                f'<div class="pimg"><b>{esc(gshort)}</b><i>{"Art. " + esc(art) if art and art != "—" else "—"}</i></div>'
                 '<div class="pbody">'
                 f'<div class="pname">{esc(name)}</div>{de_line}'
                 f'<div class="prow"><span class="pprice">{esc(price)}</span></div>'
