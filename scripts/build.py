@@ -364,17 +364,16 @@ def render_buylist(buylist, t, lang):
     return '\n'.join(out)
 
 
-def week_nav(lang, meta, weeks, depth):
-    """期号切换：本周 + 历史期号 + 归档页"""
-    base = '../' * depth
+def week_nav(lang, meta, weeks, depth=0):
+    """期号切换：本周 + 历史期号 + 归档页（全部用站点绝对路径，避免层级算错）"""
     out = []
     for w in weeks:
         cur = (w['id'] == meta['id'])
-        href = (base or './') if cur else f'{base}w/{w["id"]}/'
+        href = f'/{lang}/' if cur else f'/{lang}/w/{w["id"]}/'
         label = w.get('short_' + lang) or w['id']
         out.append(f'<a class="wk{" on" if cur else ""}" href="{href}">{esc(label)}</a>')
     if len(weeks) > 1:
-        out.append(f'<a class="wk" href="{base}archive/">{esc({"zh": "全部期号", "de": "Alle Ausgaben", "en": "All issues"}[lang])}</a>')
+        out.append(f'<a class="wk" href="/{lang}/archive/">{esc({"zh": "全部期号", "de": "Alle Ausgaben", "en": "All issues"}[lang])}</a>')
     return '<div class="weeks">' + ''.join(out) + '</div>'
 
 
@@ -382,8 +381,6 @@ def page(lang, week, meta, items, buylist, t, how_lines, depth=0, weeks=None):
     u = t['ui']
     L = lambda k: esc(u[k][lang])
     w = meta
-    base = '../' * depth              # 当前页到语言根目录
-    langbase = '../' * (depth + 1)    # 当前页到站点根目录
     hl = render_highlights(items, meta, t, lang)
     hl_block = ''
     if hl:
@@ -398,14 +395,14 @@ def page(lang, week, meta, items, buylist, t, how_lines, depth=0, weeks=None):
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{L('site_title')} · {esc(w.get('short_' + lang, ''))}</title>
 <meta name="description" content="{L('tagline')}">
-<link rel="stylesheet" href="{base}style.css">
-<link rel="alternate" hreflang="zh" href="{langbase}zh/">
-<link rel="alternate" hreflang="en" href="{langbase}en/">
-<link rel="alternate" hreflang="de" href="{langbase}de/">
+<link rel="stylesheet" href="/style.css">
+<link rel="alternate" hreflang="zh" href="/zh/">
+<link rel="alternate" hreflang="en" href="/en/">
+<link rel="alternate" hreflang="de" href="/de/">
 </head>
 <body>
 <header class="hero"><div class="wrap">
-  <div class="langbar"><a href="{langbase}zh/" class="{'on' if lang=='zh' else ''}">中文</a><a href="{langbase}en/" class="{'on' if lang=='en' else ''}">EN</a><a href="{langbase}de/" class="{'on' if lang=='de' else ''}">DE</a></div>
+  <div class="langbar"><a href="/zh/" class="{'on' if lang=='zh' else ''}">中文</a><a href="/en/" class="{'on' if lang=='en' else ''}">EN</a><a href="/de/" class="{'on' if lang=='de' else ''}">DE</a></div>
   <h1>{L('site_title')}<span class="sub">{L('tagline')}</span></h1>
   <p class="meta">{L('market_line')}</p>
   {wk_nav}
@@ -443,7 +440,7 @@ def page(lang, week, meta, items, buylist, t, how_lines, depth=0, weeks=None):
   <footer>
     <p>{L('footer_contact')}</p>
     <p class="small">{L('footer_disclaimer')}</p>
-    <p class="small">{L('lang_label')}：<a href="{langbase}zh/">中文</a> · <a href="{langbase}en/">English</a> · <a href="{langbase}de/">Deutsch</a></p>
+    <p class="small">{L('lang_label')}：<a href="/zh/">中文</a> · <a href="/en/">English</a> · <a href="/de/">Deutsch</a></p>
   </footer>
 </div>
 </body></html>"""
@@ -501,27 +498,25 @@ def archive_page(lang, weeks, t):
     L = lambda k: esc(u[k][lang])
     lis = []
     for i, w in enumerate(weeks):
-        href = ('../' if i else '../') + ('' if i == 0 else f'w/{w["id"]}/')
-        if i == 0:
-            href = '../'
-        lis.append(f'<li><a href="{href}">{esc(w.get("label_" + lang, w["id"]))}</a>'
-                   f'{" <span class=\"small\">(" + esc({"zh": "当前", "de": "aktuell", "en": "current"}[lang]) + ")</span>" if i == 0 else ""}</li>')
+        href = f'/{lang}/' if i == 0 else f'/{lang}/w/{w["id"]}/'
+        cur = f' <span class="small">（{esc({"zh": "当前", "de": "aktuell", "en": "current"}[lang])}）</span>' if i == 0 else ''
+        lis.append(f'<li><a href="{href}">{esc(w.get("label_" + lang, w["id"]))}</a>{cur}</li>')
     return f"""<!doctype html>
 <html lang="{lang}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{L('site_title')} · {esc({"zh": "全部期号", "de": "Alle Ausgaben", "en": "All issues"}[lang])}</title>
-<link rel="stylesheet" href="../../style.css">
+<link rel="stylesheet" href="/style.css">
 </head>
 <body>
 <header class="hero"><div class="wrap">
-  <div class="langbar"><a href="../../zh/archive/" class="{'on' if lang=='zh' else ''}">中文</a><a href="../../en/archive/" class="{'on' if lang=='en' else ''}">EN</a><a href="../../de/archive/" class="{'on' if lang=='de' else ''}">DE</a></div>
+  <div class="langbar"><a href="/zh/archive/" class="{'on' if lang=='zh' else ''}">中文</a><a href="/en/archive/" class="{'on' if lang=='en' else ''}">EN</a><a href="/de/archive/" class="{'on' if lang=='de' else ''}">DE</a></div>
   <h1>{L('site_title')}<span class="sub">{esc({"zh": "全部期号", "de": "Alle Ausgaben", "en": "All issues"}[lang])}</span></h1>
 </div></header>
 <div class="wrap">
   <section><ul class="wklist">{''.join(lis)}</ul>
-  <p class="small"><a href="../">← {esc({"zh": "回到最新一期", "de": "Zur aktuellen Ausgabe", "en": "Back to the latest issue"}[lang])}</a></p>
+  <p class="small"><a href="/{lang}/">← {esc({"zh": "回到最新一期", "de": "Zur aktuellen Ausgabe", "en": "Back to the latest issue"}[lang])}</a></p>
   </section>
   <footer><p class="small">{L('footer_disclaimer')}</p></footer>
 </div>
