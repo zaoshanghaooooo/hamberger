@@ -165,14 +165,15 @@ def parse_md(path):
     return items
 
 
-def collect_items():
+def collect_items(week_dir=None):
+    src = week_dir or FLYER
     items = []
-    if os.path.isdir(FLYER):
-        for fn in sorted(os.listdir(FLYER)):
+    if os.path.isdir(src):
+        for fn in sorted(os.listdir(src)):
             if fn.lower().endswith('.md'):
-                items.extend(parse_md(os.path.join(FLYER, fn)))
+                items.extend(parse_md(os.path.join(src, fn)))
     # 额外条目（例如 Lieferservice 传单，以 JSON 形式提供）
-    extra = os.path.join(FLYER, 'extra_items.json')
+    extra = os.path.join(src, 'extra_items.json')
     if os.path.exists(extra):
         with open(extra, encoding='utf-8') as fh:
             for it in json.load(fh):
@@ -195,43 +196,58 @@ def collect_items():
 
 
 CSS = """
-:root{--bg:#0f1115;--card:#171a21;--line:#262b35;--fg:#e8ecf3;--dim:#9aa4b2;
---accent:#4da3ff;--accent2:#ffd24d;--ok:#57d38c;--warn:#ff8a5c}
+:root{--bg:#f4f5f7;--card:#fff;--line:#ebedf0;--line2:#e3e6eb;--fg:#1f2329;--dim:#8a9099;
+--red:#e1251b;--red-dark:#c81623;--orange:#ff6a00;--ok:#00a862;--tag-bg:#fff1f0;--chip:#f5f6f8}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);
-font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Roboto,sans-serif}
-a{color:var(--accent);text-decoration:none}
+font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",Roboto,sans-serif}
+a{color:var(--red);text-decoration:none}
 a:hover{text-decoration:underline}
 .wrap{max-width:1120px;margin:0 auto;padding:0 16px}
-.hero{padding:28px 0 18px;border-bottom:1px solid var(--line);
-background:linear-gradient(180deg,#171b24,#0f1115)}
-.langbar{display:flex;gap:8px;justify-content:flex-end;font-size:14px}
-.langbar a{padding:3px 10px;border:1px solid var(--line);border-radius:999px;color:var(--dim)}
-.langbar a.on{color:#0f1115;background:var(--accent2);border-color:var(--accent2);font-weight:700}
-h1{font-size:26px;margin:10px 0 6px}
-h1 .sub{display:block;font-size:15px;color:var(--dim);font-weight:400;margin-top:6px}
-.meta{color:var(--dim);font-size:14px;margin:6px 0 0}
-.badges{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0;font-size:13px}
-.badge{border:1px solid var(--line);border-radius:999px;padding:3px 10px;color:var(--dim);background:var(--card)}
-.notice{margin:16px 0;padding:12px 14px;border-left:3px solid var(--warn);background:#1a1712;color:#f0dcc9;font-size:14px}
-nav.sticky{position:sticky;top:0;z-index:5;background:rgba(15,17,21,.95);border-bottom:1px solid var(--line);
-backdrop-filter:blur(6px)}
-nav.sticky .wrap{display:flex;gap:14px;flex-wrap:wrap;padding:10px 16px;font-size:14px}
-section{padding:26px 0 6px;border-bottom:1px solid var(--line)}
-h2{font-size:20px;margin:0 0 6px}
-h3{font-size:16px;margin:22px 0 8px;color:var(--accent2)}
-.lead{color:var(--dim);font-size:14px;margin:0 0 14px}
+.hero{background:var(--card);border-bottom:1px solid var(--line);padding:22px 0 18px;
+box-shadow:0 1px 2px rgba(0,0,0,.03);position:relative}
+.hero:before{content:"";position:absolute;left:0;right:0;top:0;height:3px;
+background:linear-gradient(90deg,var(--red),var(--orange))}
+.langbar{display:flex;gap:8px;justify-content:flex-end;font-size:13px}
+.langbar a{padding:3px 12px;border:1px solid var(--line2);border-radius:999px;color:var(--dim);background:var(--chip)}
+.langbar a.on{color:#fff;background:var(--red);border-color:var(--red);font-weight:600}
+h1{font-size:25px;margin:10px 0 6px;letter-spacing:-.2px}
+h1 .sub{display:block;font-size:14px;color:var(--dim);font-weight:400;margin-top:6px}
+.meta{color:var(--dim);font-size:13px;margin:6px 0 0}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0;font-size:12.5px}
+.badge{border:1px solid var(--line2);border-radius:4px;padding:3px 10px;color:var(--dim);background:var(--chip)}
+.weeks{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 0}
+.wk{font-size:13px;padding:4px 13px;border:1px solid var(--line2);border-radius:999px;color:var(--dim);background:var(--chip)}
+.wk.on{color:#fff;background:var(--red);border-color:var(--red);font-weight:600}
+.wk:hover{text-decoration:none;border-color:var(--red);color:var(--red)}
+.wk.on:hover{color:#fff}
+.wklist{margin:6px 0 0;padding-left:18px}
+.wklist li{margin:8px 0}
+.notice{margin:16px 0;padding:12px 16px;border:1px solid #ffe1b3;border-radius:6px;
+background:#fffaf0;color:#7a5200;font-size:13.5px}
+nav.sticky{position:sticky;top:0;z-index:5;background:rgba(255,255,255,.97);
+border-bottom:1px solid var(--line);box-shadow:0 1px 3px rgba(0,0,0,.04);backdrop-filter:blur(8px)}
+nav.sticky .wrap{display:flex;gap:20px;flex-wrap:wrap;padding:12px 16px;font-size:14px}
+nav.sticky a{color:var(--fg);font-weight:500}
+nav.sticky a:hover{color:var(--red);text-decoration:none}
+section{background:var(--card);border:1px solid var(--line);border-radius:8px;
+padding:20px 20px 8px;margin:16px 0}
+h2{font-size:19px;margin:0 0 6px;padding-left:11px;position:relative}
+h2:before{content:"";position:absolute;left:0;top:3px;bottom:3px;width:4px;border-radius:2px;background:var(--red)}
+h3{font-size:15.5px;margin:22px 0 8px;color:var(--fg);border-left:3px solid var(--orange);padding-left:9px}
+.lead{color:var(--dim);font-size:13.5px;margin:0 0 14px}
 table{width:100%;border-collapse:collapse;font-size:14px}
-th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
-th{color:var(--dim);font-weight:600;background:#141821;position:sticky;top:44px}
-td.num{white-space:nowrap;text-align:right}
-td.art{color:var(--dim);white-space:nowrap;font-variant-numeric:tabular-nums}
-.gross{color:var(--ok);white-space:nowrap;font-size:13px}
-.tag{display:inline-block;font-size:11px;padding:1px 6px;border-radius:4px;margin-left:6px;vertical-align:1px}
-.tag.tk{background:#14324a;color:#8fd0ff}
-.tag.asia{background:#3a2a12;color:var(--accent2)}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--dim);font-weight:600;background:var(--chip);position:sticky;top:47px;border-bottom:1px solid var(--line2)}
+tbody tr:hover{background:#fcfcfd}
+td.num{white-space:nowrap;text-align:right;color:var(--red);font-weight:600}
+td.art{color:#b0b4bb;white-space:nowrap;font-variant-numeric:tabular-nums}
+.gross{color:var(--ok);white-space:nowrap;font-size:12.5px;font-weight:500}
+.tag{display:inline-block;font-size:11px;padding:1px 6px;border-radius:3px;margin-left:6px;vertical-align:1px}
+.tag.tk{background:#eef5ff;color:#2b6cd4}
+.tag.asia{background:var(--tag-bg);color:var(--red)}
 .small{color:var(--dim);font-size:13px}
-.orig{color:#6f7a8c;font-size:12px;margin-top:2px}
+.orig{color:#b0b4bb;font-size:12px;margin-top:2px}
 details{margin:0 0 6px}
 summary{cursor:pointer;padding:10px 0;font-weight:600;color:var(--fg)}
 .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:10px 0}
@@ -348,33 +364,51 @@ def render_buylist(buylist, t, lang):
     return '\n'.join(out)
 
 
-def page(lang, week, meta, items, buylist, t, how_lines):
+def week_nav(lang, meta, weeks, depth):
+    """期号切换：本周 + 历史期号 + 归档页"""
+    base = '../' * depth
+    out = []
+    for w in weeks:
+        cur = (w['id'] == meta['id'])
+        href = (base or './') if cur else f'{base}w/{w["id"]}/'
+        label = w.get('short_' + lang) or w['id']
+        out.append(f'<a class="wk{" on" if cur else ""}" href="{href}">{esc(label)}</a>')
+    if len(weeks) > 1:
+        out.append(f'<a class="wk" href="{base}archive/">{esc({"zh": "全部期号", "de": "Alle Ausgaben", "en": "All issues"}[lang])}</a>')
+    return '<div class="weeks">' + ''.join(out) + '</div>'
+
+
+def page(lang, week, meta, items, buylist, t, how_lines, depth=0, weeks=None):
     u = t['ui']
     L = lambda k: esc(u[k][lang])
     w = meta
-    hl = render_highlights(items, week, t, lang)
+    base = '../' * depth              # 当前页到语言根目录
+    langbase = '../' * (depth + 1)    # 当前页到站点根目录
+    hl = render_highlights(items, meta, t, lang)
     hl_block = ''
     if hl:
         hl_block = (f'<section id="highlight"><h2>{L("sec_highlight_title")}</h2>'
                     f'<p class="lead">{L("sec_highlight_intro")}</p>{hl}</section>')
     how = '\n'.join(f'<li>{esc(x[lang] if isinstance(x, dict) else x)}</li>' for x in how_lines)
+    wk_nav = week_nav(lang, meta, weeks or [meta], depth)
     return f"""<!doctype html>
 <html lang="{lang}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>{L('site_title')}</title>
+<title>{L('site_title')} · {esc(w.get('short_' + lang, ''))}</title>
 <meta name="description" content="{L('tagline')}">
-<link rel="stylesheet" href="../style.css">
-<link rel="alternate" hreflang="zh" href="../zh/">
-<link rel="alternate" hreflang="en" href="../en/">
-<link rel="alternate" hreflang="de" href="../de/">
+<link rel="stylesheet" href="{base}style.css">
+<link rel="alternate" hreflang="zh" href="{langbase}zh/">
+<link rel="alternate" hreflang="en" href="{langbase}en/">
+<link rel="alternate" hreflang="de" href="{langbase}de/">
 </head>
 <body>
 <header class="hero"><div class="wrap">
-  <div class="langbar"><a href="../zh/" class="{'on' if lang=='zh' else ''}">中文</a><a href="../en/" class="{'on' if lang=='en' else ''}">EN</a><a href="../de/" class="{'on' if lang=='de' else ''}">DE</a></div>
+  <div class="langbar"><a href="{langbase}zh/" class="{'on' if lang=='zh' else ''}">中文</a><a href="{langbase}en/" class="{'on' if lang=='en' else ''}">EN</a><a href="{langbase}de/" class="{'on' if lang=='de' else ''}">DE</a></div>
   <h1>{L('site_title')}<span class="sub">{L('tagline')}</span></h1>
   <p class="meta">{L('market_line')}</p>
+  {wk_nav}
   <div class="badges">
     <span class="badge">{L('week_label')}：{esc(w.get('label_' + lang) or w.get('label_zh',''))}</span>
     <span class="badge">{L('updated_label')}：{esc(week.get('updated',''))}</span>
@@ -409,7 +443,7 @@ def page(lang, week, meta, items, buylist, t, how_lines):
   <footer>
     <p>{L('footer_contact')}</p>
     <p class="small">{L('footer_disclaimer')}</p>
-    <p class="small">{L('lang_label')}：<a href="../zh/">中文</a> · <a href="../en/">English</a> · <a href="../de/">Deutsch</a></p>
+    <p class="small">{L('lang_label')}：<a href="{langbase}zh/">中文</a> · <a href="{langbase}en/">English</a> · <a href="{langbase}de/">Deutsch</a></p>
   </footer>
 </div>
 </body></html>"""
@@ -429,8 +463,8 @@ ROOT_HTML = """<!doctype html>
   location.replace(t+'/');
 })();
 </script>
-<style>body{background:#0f1115;color:#e8ecf3;font:16px/1.6 system-ui,sans-serif;padding:40px}
-a{color:#4da3ff}</style>
+<style>body{background:#f4f5f7;color:#1f2329;font:16px/1.6 system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;padding:48px}
+a{color:#e1251b}</style>
 </head>
 <body>
 <p>Redirecting… / 正在跳转… / Weiterleitung…</p>
@@ -461,6 +495,39 @@ HOW_LINES = [
 ]
 
 
+def archive_page(lang, weeks, t):
+    """全部期号列表页 /<lang>/archive/"""
+    u = t['ui']
+    L = lambda k: esc(u[k][lang])
+    lis = []
+    for i, w in enumerate(weeks):
+        href = ('../' if i else '../') + ('' if i == 0 else f'w/{w["id"]}/')
+        if i == 0:
+            href = '../'
+        lis.append(f'<li><a href="{href}">{esc(w.get("label_" + lang, w["id"]))}</a>'
+                   f'{" <span class=\"small\">(" + esc({"zh": "当前", "de": "aktuell", "en": "current"}[lang]) + ")</span>" if i == 0 else ""}</li>')
+    return f"""<!doctype html>
+<html lang="{lang}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{L('site_title')} · {esc({"zh": "全部期号", "de": "Alle Ausgaben", "en": "All issues"}[lang])}</title>
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<header class="hero"><div class="wrap">
+  <div class="langbar"><a href="../../zh/archive/" class="{'on' if lang=='zh' else ''}">中文</a><a href="../../en/archive/" class="{'on' if lang=='en' else ''}">EN</a><a href="../../de/archive/" class="{'on' if lang=='de' else ''}">DE</a></div>
+  <h1>{L('site_title')}<span class="sub">{esc({"zh": "全部期号", "de": "Alle Ausgaben", "en": "All issues"}[lang])}</span></h1>
+</div></header>
+<div class="wrap">
+  <section><ul class="wklist">{''.join(lis)}</ul>
+  <p class="small"><a href="../">← {esc({"zh": "回到最新一期", "de": "Zur aktuellen Ausgabe", "en": "Back to the latest issue"}[lang])}</a></p>
+  </section>
+  <footer><p class="small">{L('footer_disclaimer')}</p></footer>
+</div>
+</body></html>"""
+
+
 def main():
     global DIST
     if '--out' in sys.argv:
@@ -468,8 +535,7 @@ def main():
     t = load_json('i18n.json')
     week = load_json('week.json')
     buylist = load_json('buylist.json', {'groups': []})
-    meta = week.get('weeks', [{}])[0]
-    items = collect_items()
+    weeks = week.get('weeks', [])
 
     # 只有输出目录不是仓库根时才清空（避免误删源码）
     if os.path.abspath(DIST) != os.path.abspath(ROOT):
@@ -482,19 +548,31 @@ def main():
         fh.write(CSS)
     with open(os.path.join(DIST, 'index.html'), 'w', encoding='utf-8') as fh:
         fh.write(ROOT_HTML)
-    for lang in LANGS:
-        d = os.path.join(DIST, lang)
-        os.makedirs(d, exist_ok=True)
-        with open(os.path.join(d, 'index.html'), 'w', encoding='utf-8') as fh:
-            fh.write(page(lang, week, meta, items, buylist, t, HOW_LINES))
 
-    cats = {}
-    for it in items:
-        cats[it['cat']] = cats.get(it['cat'], 0) + 1
+    stats = []
+    for lang in LANGS:
+        for i, w in enumerate(weeks):
+            wdir = os.path.join(FLYER, w.get('dir') or w['id'])
+            items = collect_items(wdir)
+            if i == 0:
+                out = os.path.join(DIST, lang, 'index.html')
+                depth = 0
+            else:
+                out = os.path.join(DIST, lang, 'w', w['id'], 'index.html')
+                depth = 2
+            os.makedirs(os.path.dirname(out), exist_ok=True)
+            with open(out, 'w', encoding='utf-8') as fh:
+                fh.write(page(lang, week, w, items, buylist, t, HOW_LINES, depth, weeks))
+            if lang == 'zh':
+                stats.append((w['id'], len(items), len(items) and sum(1 for it in items if tr(it['name'], 'zh')[1])))
+        ap = os.path.join(DIST, lang, 'archive', 'index.html')
+        os.makedirs(os.path.dirname(ap), exist_ok=True)
+        with open(ap, 'w', encoding='utf-8') as fh:
+            fh.write(archive_page(lang, weeks, t))
+
     print(f'built -> {DIST}')
-    print(f'items: {len(items)}')
-    for k, v in sorted(cats.items(), key=lambda x: -x[1]):
-        print(f'  {k:10s} {v:4d}')
+    for wid, n, nt in stats:
+        print(f'  {wid}: {n} 条（其中 {nt} 条有中文名）')
     print(f'buy list groups: {len(buylist.get("groups", []))}')
 
 
