@@ -1,0 +1,83 @@
+{
+  "ui": {
+    "site_title": { "zh": "Hamberger 拼单情报站 · 慕尼黑", "de": "Hamberger Sammelbestellung · München", "en": "Hamberger Group Buy · Munich" },
+    "tagline": { "zh": "每周更新 Hamberger 批发市场特价 + 华人可购清单", "de": "Wöchentlich: Hamberger Großmarkt Angebote + Einkaufsliste", "en": "Weekly Hamberger wholesale offers + buy list" },
+    "market_line": { "zh": "Hamberger Großmarkt GmbH · Friedenstraße 16 · 81671 München（Ostbahnhof 旁）", "de": "Hamberger Großmarkt GmbH · Friedenstraße 16 · 81671 München", "en": "Hamberger Großmarkt GmbH · Friedenstraße 16 · 81671 München" },
+    "valid_label": { "zh": "本周有效", "de": "Gültig", "en": "Valid" },
+    "week_label": { "zh": "档期", "de": "Aktionszeitraum", "en": "Period" },
+    "updated_label": { "zh": "页面更新", "de": "Seite aktualisiert", "en": "Page updated" },
+    "nav_discounts": { "zh": "本周特价", "de": "Angebote", "en": "Offers" },
+    "nav_highlight": { "zh": "重点货", "de": "Highlights", "en": "Highlights" },
+    "nav_buylist": { "zh": "可购清单", "de": "Einkaufsliste", "en": "Buy list" },
+    "nav_how": { "zh": "怎么拼单", "de": "So funktioniert's", "en": "How it works" },
+    "notice_net": {
+      "zh": "批发市场标价为净价（不含增值税）。食品按 7%、饮料与非食品按 19% 估算含税价，仅作参考，实际以结账小票为准。",
+      "de": "Großmarktpreise sind Netto (zzgl. MwSt). Schätzung: 7 % für Lebensmittel, 19 % für Getränke und Non-Food – maßgeblich ist der Kassenbon.",
+      "en": "Wholesale prices are net (excl. VAT). Estimate: 7 % food, 19 % drinks and non-food – the receipt is authoritative."
+    },
+    "notice_access": {
+      "zh": "该市场仅对持 Gewerbeschein 的餐饮及商用客户开放，个人无法单独进场。本站为私人拼单信息分享，非 Hamberger 官方页面。",
+      "de": "Zutritt nur für Wiederverkäufer und gewerbliche Großverbraucher mit gültigem Ausweis. Diese Seite ist eine private Sammelbestell-Info, kein offizielles Angebot von Hamberger.",
+      "en": "Entry is limited to registered trade customers with a valid business licence. This is a private group-buy info page, not an official Hamberger page."
+    },
+    "sec_discounts_title": { "zh": "本周特价（Hamberger 折扣册）", "de": "Angebote der Woche (Hamberger Prospekt)", "en": "This week's offers (Hamberger flyer)" },
+    "sec_discounts_intro": {
+      "zh": "以下条目逐页摘自 Hamberger 本周纸质/电子折扣册，保留原价（净价）与货号 Art.Nr。整本册子按货架区分组。",
+      "de": "Alle Positionen stammen Seite für Seite aus dem aktuellen Hamberger Prospekt, inkl. Original-Nettopreis und Artikelnummer. Gruppiert nach Sortimentsbereich.",
+      "en": "All items are taken page by page from the current Hamberger flyer, including net price and article number, grouped by store area."
+    },
+    "sec_highlight_title": { "zh": "亚洲人重点关注", "de": "Für asiatische Küche besonders relevant", "en": "Especially relevant for Asian cooking" },
+    "sec_highlight_intro": {
+      "zh": "当周最值得拼的那些（整禽、野味、大包装、亚洲进口品、餐饮耗材）。",
+      "de": "Die lohnendsten Positionen der Woche (Ganzgeflügel, Wild, Großgebinde, Asien-Importe, Gastro-Verbrauchsmaterial).",
+      "en": "The most worthwhile items this week (whole poultry, game, bulk packs, Asian imports, catering consumables)."
+    },
+    "sec_buylist_title": { "zh": "可购清单", "de": "Einkaufsliste", "en": "Buy list" },
+    "sec_buylist_intro": {
+      "zh": "已比对德国普通超市（REWE / Edeka / Kaufland / Aldi / Lidl / Penny / Netto）后的结果：这些品在德国超市买不到或明显更贵。所有价格单位为欧元。",
+      "de": "Abgleich mit deutschen Supermärkten (REWE / Edeka / Kaufland / Aldi / Lidl / Penny / Netto): Diese Artikel sind dort nicht oder deutlich teurer erhältlich. Alle Preise in Euro.",
+      "en": "Compared against German supermarkets (REWE / Edeka / Kaufland / Aldi / Lidl / Penny / Netto): these items are unavailable or clearly more expensive there. All prices in EUR."
+    },
+    "sec_how_title": { "zh": "怎么拼单", "de": "So funktioniert die Sammelbestellung", "en": "How the group buy works" },
+    "col_item": { "zh": "商品", "de": "Artikel", "en": "Item" },
+    "col_spec": { "zh": "大致规格", "de": "Gebinde", "en": "Pack size" },
+    "col_art": { "zh": "货号", "de": "Art.Nr", "en": "Art. no." },
+    "col_net": { "zh": "净价", "de": "Netto", "en": "Net" },
+    "col_gross": { "zh": "含税估算", "de": "inkl. MwSt (ca.)", "en": "incl. VAT (est.)" },
+    "col_min": { "zh": "最低购买量", "de": "Mindestabnahme", "en": "Minimum quantity" },
+    "col_hamb": { "zh": "拼单价参考", "de": "Preis (Sammelbestellung)", "en": "Group-buy price" },
+    "col_compare": { "zh": "德国超市对比", "de": "Vergleich Supermarkt", "en": "Supermarket comparison" },
+    "col_why": { "zh": "为什么进清单", "de": "Warum auf der Liste", "en": "Why it's listed" },
+    "col_source": { "zh": "来源", "de": "Quelle", "en": "Source" },
+    "tag_tk": { "zh": "冷冻", "de": "TK", "en": "frozen" },
+    "tag_asia": { "zh": "亚洲", "de": "Asien", "en": "Asian" },
+    "count_items": { "zh": "共 {n} 条", "de": "{n} Positionen", "en": "{n} items" },
+    "page_discounts": { "zh": "本周特价", "de": "Angebote", "en": "Offers" },
+    "footer_contact": {
+      "zh": "拼单/咨询：小红书「慕尼黑 Hamberger 拼单」· 群内接龙，周日 20:00 截单，周一自提或配送。",
+      "de": "Bestellung/Info: Xiaohongshu-Gruppe „München Hamberger Sammelbestellung“ · Bestellschluss Sonntag 20:00, Abholung/Lieferung Montag.",
+      "en": "Order/info: Xiaohongshu group “Munich Hamberger Group Buy” · cut-off Sunday 20:00, pickup/delivery Monday."
+    },
+    "footer_disclaimer": {
+      "zh": "本站为私人信息分享，与 Hamberger Großmarkt GmbH 无隶属或合作关系；价格与库存以门店当日为准；批发市场仅向持证商用客户销售。",
+      "de": "Private Info-Seite, keine Verbindung zu Hamberger Großmarkt GmbH. Preise und Verfügbarkeit tagesaktuell im Markt; Verkauf nur an gewerbliche Kunden.",
+      "en": "Private info page, not affiliated with Hamberger Großmarkt GmbH. Prices and stock as of the day in store; sales to trade customers only."
+    },
+    "lang_label": { "zh": "语言", "de": "Sprache", "en": "Language" }
+  },
+  "categories": {
+    "fleisch": { "zh": "肉类与香肠", "de": "Fleisch & Wurst", "en": "Meat & sausage" },
+    "fisch": { "zh": "鱼与海鲜", "de": "Fisch & Meeresfrüchte", "en": "Fish & seafood" },
+    "wild": { "zh": "野味周", "de": "Wild-Wochen", "en": "Game weeks" },
+    "tk": { "zh": "冷冻食品", "de": "Tiefkühl", "en": "Frozen" },
+    "kaese": { "zh": "奶酪", "de": "Käse", "en": "Cheese" },
+    "milch": { "zh": "乳制品", "de": "Milch & Molkerei", "en": "Dairy" },
+    "feinkost": { "zh": "熟食与精致食品", "de": "Feinkost", "en": "Deli & fine food" },
+    "obst": { "zh": "果蔬", "de": "Obst & Gemüse", "en": "Fruit & vegetables" },
+    "asia": { "zh": "亚洲食品", "de": "Asien-Sortiment", "en": "Asian range" },
+    "trocken": { "zh": "干货与主食", "de": "Trockensortiment", "en": "Dry goods & staples" },
+    "getraenke": { "zh": "饮料与酒", "de": "Getränke & Wein", "en": "Drinks & wine" },
+    "nonfood": { "zh": "非食品与耗材", "de": "Non-Food & Verbrauchsmaterial", "en": "Non-food & consumables" },
+    "sonstiges": { "zh": "其他特价", "de": "Sonstige Angebote", "en": "Other offers" }
+  }
+}

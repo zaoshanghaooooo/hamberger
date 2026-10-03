@@ -1,0 +1,44 @@
+{
+  "current": "2026-W41-42",
+  "updated": "2026-10-03",
+  "weeks": [
+    {
+      "id": "2026-W41-42",
+      "label_zh": "第 41/42 周 · 2026.10.05 – 10.17",
+      "label_en": "Week 41/42 · 5–17 Oct 2026",
+      "label_de": "KW 41/42 · 05.10.–17.10.2026",
+      "valid_from": "2026-10-05",
+      "valid_to": "2026-10-17",
+      "source_de": "Hamberger Aktion-001-KW-41_42 (München, 52 Seiten) + Lieferservice-001-KW-41",
+      "source_zh": "Hamberger 慕尼黑门店促销册 Aktion-001-KW-41_42（52 页）+ 配送册 Lieferservice-001-KW-41",
+      "source_en": "Hamberger Munich store flyer Aktion-001-KW-41_42 (52 pages) + delivery flyer Lieferservice-001-KW-41",
+      "files": [
+        "muenchen_p01-13.md",
+        "muenchen_p14-26.md",
+        "muenchen_p27-39.md",
+        "muenchen_p40-52.md",
+        "extra_items.json"
+      ]
+    }
+  ],
+  "highlights": [
+    "216598",
+    "215716",
+    "284815",
+    "292395",
+    "230680",
+    "217669",
+    "210458",
+    "232528",
+    "60358",
+    "224848",
+    "172382",
+    "190539",
+    "608855",
+    "613649",
+    "640403",
+    "852345",
+    "225861",
+    "297797"
+  ]
+}
