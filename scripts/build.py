@@ -60,7 +60,65 @@ def load_json(name, default=None):
 
 
 def clean(s):
-    return re.sub(r'`?\s*\[(ASIA|TK)\]\s*`?', '', s or '').strip(' `')
+    s = re.sub(r'`?\s*\[(ASIA|TK)\]\s*`?', '', s or '').strip(' `')
+    # 去掉转录时留下的备注（如「Marke 看不清」「Schriftzug unleserlich」），别混进货名
+    s = re.sub(r'\(\s*(?:Marke\s*)?[^)]*(?:unleserlich|看不清|nicht lesbar)[^)]*\)', '', s)
+    s = re.sub(r'\bMarke\s+看不清\b', '', s)
+    s = re.sub(r'\s{2,}', ' ', s).strip(' ,-–—|')
+    return s
+
+
+# ---------------------------------------------------------------- 德语 → 中文/英文 对照
+GLOSSARY = load_json('glossary.json', {})
+G_KEYS = sorted([k for k in GLOSSARY if not k.startswith('_')], key=len, reverse=True)
+G_SINGLE = {k.lower() for k in G_KEYS if ' ' not in k}
+G_PHRASE = [k.lower() for k in G_KEYS if ' ' in k]
+WORD_RE = re.compile(r'[A-Za-zÄÖÜäöüß][A-Za-zÄÖÜäöüß\-\.]*')
+_pat_cache = {}
+
+
+def _pat(key):
+    if key not in _pat_cache:
+        _pat_cache[key] = re.compile(
+            r'(?<![A-Za-zÄÖÜäöüß])' + re.escape(key) + r'(?![A-Za-zÄÖÜäöüß])', re.IGNORECASE)
+    return _pat_cache[key]
+
+
+def coverage(text):
+    """原文有多少词能在词典里找到（0~1），用于判断译文是否可信"""
+    words = WORD_RE.findall(text or '')
+    if not words:
+        return 1.0
+    hits = 0
+    for w in words:
+        wl = w.lower()
+        if wl in G_SINGLE or any(wl in p for p in G_PHRASE):
+            hits += 1
+    return hits / len(words)
+
+
+def _tidy(out):
+    """收拾译文里残留的德语连接词、连字符和孤立字母"""
+    out = re.sub(r'(?<=[\u4e00-\u9fff])[\s\-]*\bund\b[\s\-]*(?=[\u4e00-\u9fff])', '', out)
+    out = re.sub(r'(?<=[\u4e00-\u9fff])[\s\-]*&[\s\-]*(?=[\u4e00-\u9fff])', '和', out)
+    out = re.sub(r'(?<=[\u4e00-\u9fff])[\s]*-[\s]*(?=[\u4e00-\u9fff])', '', out)
+    out = re.sub(r'(?<=[\u4e00-\u9fff])-(?=[\u4e00-\u9fff])', '', out)
+    out = re.sub(r'\b[A-Za-zÄÖÜäöüß]{1,2}[\'’](?=[\u4e00-\u9fff])', '', out)
+    out = re.sub(r'\s{2,}', ' ', out)
+    return out.strip(' ,·/-–—„“”"\'')
+
+
+def tr(text, lang, min_cov=0.45):
+    """译成 zh/en。返回 (译文, 是否可信)；词典里没有的品牌名原样保留。"""
+    if not text or lang == 'de':
+        return text, False
+    cov = coverage(text)
+    out = text
+    for k in G_KEYS:
+        m = _pat(k)
+        if m.search(out):
+            out = m.sub(GLOSSARY[k][0 if lang == 'zh' else 1], out)
+    return _tidy(out), cov >= min_cov
 
 
 def classify(text):
@@ -173,6 +231,7 @@ td.art{color:var(--dim);white-space:nowrap;font-variant-numeric:tabular-nums}
 .tag.tk{background:#14324a;color:#8fd0ff}
 .tag.asia{background:#3a2a12;color:var(--accent2)}
 .small{color:var(--dim);font-size:13px}
+.orig{color:#6f7a8c;font-size:12px;margin-top:2px}
 details{margin:0 0 6px}
 summary{cursor:pointer;padding:10px 0;font-weight:600;color:var(--fg)}
 .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:10px 0}
@@ -199,11 +258,22 @@ def render_item_rows(items, t, lang):
         if 'asia' in it['tags'] or it['cat'] == 'asia':
             tags += f'<span class="tag asia">{esc(t["ui"]["tag_asia"][lang])}</span>'
         gross = f'<span class="gross">≈ {fmt_eur(it["gross"])}</span>' if it.get('gross') else '—'
-        desc = f'<div class="small">{esc(it["desc"])}</div>' if it.get('desc') else ''
+        # 名称：中文/英文页做对照，德语页保持原文
+        name_de = it['name']
+        name_tr, ok = tr(name_de, lang)
+        if lang == 'de' or not ok:
+            head = esc(name_de)
+            orig = f'<div class="orig">{esc(name_tr)}</div>' if (lang != 'de' and ok is False and name_tr != name_de) else ''
+        else:
+            head = esc(name_tr)
+            orig = f'<div class="orig">{esc(name_de)}</div>'
+        desc_tr, _ = tr(it.get('desc', ''), lang)
+        desc = f'<div class="small">{esc(desc_tr)}</div>' if it.get('desc') else ''
+        spec_tr, _ = tr(it.get('spec', ''), lang)
         rows.append(
             '<tr>'
-            f'<td>{esc(it["name"])}{tags}{desc}</td>'
-            f'<td class="small">{esc(it["spec"])}</td>'
+            f'<td>{head}{tags}{desc}{orig}</td>'
+            f'<td class="small">{esc(spec_tr)}</td>'
             f'<td class="art">{esc(it["art"])}</td>'
             f'<td class="num">{esc(it["price"])}</td>'
             f'<td class="num">{gross}</td>'

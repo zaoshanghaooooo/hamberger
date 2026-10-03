@@ -35,6 +35,7 @@ td.art{color:var(--dim);white-space:nowrap;font-variant-numeric:tabular-nums}
 .tag.tk{background:#14324a;color:#8fd0ff}
 .tag.asia{background:#3a2a12;color:var(--accent2)}
 .small{color:var(--dim);font-size:13px}
+.orig{color:#6f7a8c;font-size:12px;margin-top:2px}
 details{margin:0 0 6px}
 summary{cursor:pointer;padding:10px 0;font-weight:600;color:var(--fg)}
 .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:10px 0}
