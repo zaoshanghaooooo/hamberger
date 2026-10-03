@@ -17,6 +17,7 @@
 
 import os
 import re
+import sys
 import json
 import html
 import shutil
@@ -24,7 +25,8 @@ import shutil
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, 'data')
 FLYER = os.path.join(ROOT, 'flyer')
-DIST = os.path.join(ROOT, 'dist')
+# 默认直接输出到仓库根目录：这样 Vercel（CLI / GitHub 导入）拿到的就是可直接托管的静态站
+DIST = ROOT
 LANGS = ['zh', 'en', 'de']
 
 # 分类判定（按顺序匹配，先专后泛）
@@ -390,15 +392,22 @@ HOW_LINES = [
 
 
 def main():
+    global DIST
+    if '--out' in sys.argv:
+        DIST = os.path.abspath(sys.argv[sys.argv.index('--out') + 1])
     t = load_json('i18n.json')
     week = load_json('week.json')
     buylist = load_json('buylist.json', {'groups': []})
     meta = week.get('weeks', [{}])[0]
     items = collect_items()
 
-    if os.path.isdir(DIST):
-        shutil.rmtree(DIST)
-    os.makedirs(DIST)
+    # 只有输出目录不是仓库根时才清空（避免误删源码）
+    if os.path.abspath(DIST) != os.path.abspath(ROOT):
+        if os.path.isdir(DIST):
+            shutil.rmtree(DIST)
+        os.makedirs(DIST, exist_ok=True)
+    else:
+        os.makedirs(DIST, exist_ok=True)
     with open(os.path.join(DIST, 'style.css'), 'w', encoding='utf-8') as fh:
         fh.write(CSS)
     with open(os.path.join(DIST, 'index.html'), 'w', encoding='utf-8') as fh:

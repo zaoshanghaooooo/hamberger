@@ -1,6 +1,6 @@
 ﻿__pycache__/
 *.pyc
 .vercel
+dist/
 .DS_Store
 Thumbs.db
-.vercel
