@@ -466,6 +466,8 @@ def page(lang, week, meta, items, buylist, t, how_lines, depth=0, weeks=None):
         hl_block = (f'<section id="highlight"><h2>{L("sec_highlight_title")}</h2>'
                     f'<p class="lead">{L("sec_highlight_intro")}</p>{hl}</section>')
     how = '\n'.join(f'<li>{esc(x[lang] if isinstance(x, dict) else x)}</li>' for x in how_lines)
+    fee_rows = '\n'.join(
+        f'<tr><td>{esc(r[lang])}</td><td class="num">{esc(r["v"][lang])}</td></tr>' for r in FEE_ROWS)
     wk_nav = week_nav(lang, meta, weeks or [meta], depth)
     return f"""<!doctype html>
 <html lang="{lang}">
@@ -518,6 +520,9 @@ def page(lang, week, meta, items, buylist, t, how_lines, depth=0, weeks=None):
   <section id="how">
     <h2>{L('sec_how_title')}</h2>
     <ul>{how}</ul>
+    <h3>{L('fee_title')}</h3>
+    <div class="tw"><table><thead><tr><th>{L('fee_item')}</th><th>{L('fee_amount')}</th></tr></thead>
+    <tbody>{fee_rows}</tbody></table></div>
   </section>
   <footer>
     <p>{L('footer_contact')}</p>
@@ -553,24 +558,47 @@ a{color:#e1251b}</style>
 
 
 HOW_LINES = [
-    {'zh': '进群（小红书「慕尼黑 Hamberger 拼单」，周日 20:00 截单）。',
-     'de': 'Gruppe beitreten (Xiaohongshu „München Hamberger Sammelbestellung“, Bestellschluss Sonntag 20:00).',
-     'en': 'Join the group (Xiaohongshu “Munich Hamberger Group Buy”, cut-off Sunday 20:00).'},
-    {'zh': '下单：把「商品名 / 货号 + 数量」发到群接龙；整箱、整桶、整只类需按最低购买量拼。',
-     'de': 'Bestellung: Artikel + Art.Nr + Menge in die Gruppe; bei Kisten, Eimern und ganzen Tieren gilt die Mindestabnahme.',
-     'en': 'Order: post item + article no. + quantity in the group; crates, buckets and whole animals follow the minimum quantity.'},
-    {'zh': '结算：按当日小票金额 AA（食品含 7% 增值税，饮料与非食品含 19%），不收商品加价。',
-     'de': 'Abrechnung: 1:1 nach Kassenbon (7 % MwSt. auf Lebensmittel, 19 % auf Getränke/Non-Food), kein Aufschlag auf die Ware.',
-     'en': 'Payment: split the receipt exactly (7 % VAT on food, 19 % on drinks/non-food), no markup on goods.'},
-    {'zh': '取货：周一 18:00–20:00 Ostbahnhof 附近自提免费；1 km 内配送 3 €；请自备冷藏袋。',
-     'de': 'Abholung: Montag 18:00–20:00 nahe Ostbahnhof kostenlos; Lieferung im 1-km-Umkreis 3 €; Kühltasche mitbringen.',
-     'en': 'Pickup: Monday 18:00–20:00 near Ostbahnhof free; delivery within 1 km 3 €; bring a cool bag.'},
-    {'zh': '支付：PayPal / 现金 / 微信 / 支付宝。',
-     'de': 'Zahlung: PayPal / Bar / WeChat / Alipay.',
-     'en': 'Payment: PayPal / cash / WeChat / Alipay.'},
-    {'zh': '提示：批发市场只对有营业执照的商用客户开放，本拼单由持卡人代为采购。',
-     'de': 'Hinweis: Der Großmarkt verkauft nur an gewerbliche Kunden; die Sammelbestellung wird über eine Kundenkarte abgewickelt.',
-     'en': 'Note: the wholesale market only sells to trade customers; this group buy is handled via a card holder.'},
+    {'zh': '进群：小红书「慕尼黑 Hamberger 拼单」。周日 20:00 截单，截单后不再加单。',
+     'de': 'Gruppe: Xiaohongshu „München Hamberger Sammelbestellung“. Bestellschluss Sonntag 20:00.',
+     'en': 'Group: Xiaohongshu “Munich Hamberger Group Buy”. Cut-off Sunday 20:00.'},
+    {'zh': '下单格式：商品名或货号 + 数量。整箱、整桶、整只的按可购清单里写的最低起购量拼。',
+     'de': 'Bestellformat: Artikel oder Art.Nr + Menge. Kisten, Eimer und ganze Tiere nach der Mindestabnahme in der Einkaufsliste.',
+     'en': 'Order format: item or article no. + quantity. Crates, buckets and whole animals follow the minimum quantity in the buy list.'},
+    {'zh': '商品结算：按当天小票 AA，一分不加价（食品 7%、饮料与非食品 19% 的税已经打在小票里）。',
+     'de': 'Ware: 1:1 nach Kassenbon, kein Aufschlag (7 % auf Lebensmittel, 19 % auf Getränke und Non-Food stehen bereits auf dem Bon).',
+     'en': 'Goods: split the receipt exactly, no markup (7 % VAT on food, 19 % on drinks and non-food is already on the receipt).'},
+    {'zh': '服务费：2 €/单，自提也含。这是跑腿费，不是商品加价——REWE 自提低于 70 € 也收 2 € 服务费。',
+     'de': 'Servicegebühr: 2 € pro Bestellung, auch bei Abholung. Das ist die Botengebühr, kein Warenaufschlag – REWE verlangt beim Abholservice unter 70 € ebenfalls 2 €.',
+     'en': 'Service fee: €2 per order, including pickup. That is the runner fee, not a markup on goods — REWE also charges €2 for pickup orders under €70.'},
+    {'zh': '自提：Ostbahnhof 附近免费，周一傍晚 18:00–20:00（时间以群内通知为准）。',
+     'de': 'Abholung: nahe Ostbahnhof kostenlos, Montagabend 18:00–20:00 (genaue Zeit laut Gruppe).',
+     'en': 'Pickup: free near Ostbahnhof, Monday evening 18:00–20:00 (exact time announced in the group).'},
+    {'zh': '配送：1 km 内 +4 €、1–3 km +6 €、3–5 km +9 €；满 120 € 免配送费。固定周一、周四两班，凑满 5 单发车。',
+     'de': 'Lieferung: +4 € (bis 1 km), +6 € (1–3 km), +9 € (3–5 km); ab 120 € Warenwert lieferkostenfrei. Zwei feste Touren (Mo und Do), ab 5 Bestellungen.',
+     'en': 'Delivery: +€4 (up to 1 km), +€6 (1–3 km), +€9 (3–5 km); free from a €120 basket. Two fixed runs (Mon and Thu), starting at 5 orders.'},
+    {'zh': '大件与冷链：整箱 ≥15 kg、冷冻品、整禽，另加 2 €。请自备冷藏袋。',
+     'de': 'Großgebinde und Kühlkette: Kisten ab 15 kg, TK-Ware, ganze Tiere +2 €. Kühltasche mitbringen.',
+     'en': 'Bulk and cold chain: crates from 15 kg, frozen goods, whole birds +€2. Bring a cool bag.'},
+    {'zh': '支付：PayPal / 现金 / 微信 / 支付宝。批发市场只卖给持营业执照的商用客户，我们代买，价格和库存以门店当天为准。',
+     'de': 'Zahlung: PayPal / Bar / WeChat / Alipay. Der Großmarkt verkauft nur an Gewerbetreibende – wir kaufen für euch ein; Preise und Bestand tagesaktuell.',
+     'en': 'Payment: PayPal / cash / WeChat / Alipay. The wholesale market sells to trade customers only — we buy on your behalf; prices and stock are as of the day.'},
+]
+
+FEE_ROWS = [
+    {'zh': '商品', 'de': 'Ware', 'en': 'Goods',
+     'v': {'zh': '按当天小票 AA，不加价', 'de': '1:1 nach Kassenbon, kein Aufschlag', 'en': 'At cost, split by receipt, no markup'}},
+    {'zh': '服务费', 'de': 'Servicegebühr', 'en': 'Service fee',
+     'v': {'zh': '2 €/单（自提也含）', 'de': '2 € pro Bestellung (auch Abholung)', 'en': '€2 per order (pickup included)'}},
+    {'zh': '自提（Ostbahnhof 附近）', 'de': 'Abholung nahe Ostbahnhof', 'en': 'Pickup near Ostbahnhof',
+     'v': {'zh': '0 €', 'de': '0 €', 'en': '€0'}},
+    {'zh': '配送 1 km 内 / 1–3 km / 3–5 km', 'de': 'Lieferung bis 1 km / 1–3 km / 3–5 km', 'en': 'Delivery up to 1 km / 1–3 km / 3–5 km',
+     'v': {'zh': '+4 € / +6 € / +9 €', 'de': '+4 € / +6 € / +9 €', 'en': '+€4 / +€6 / +€9'}},
+    {'zh': '满 120 €', 'de': 'ab 120 € Warenwert', 'en': 'From a €120 basket',
+     'v': {'zh': '免配送费（服务费照收）', 'de': 'lieferkostenfrei (Servicegebühr bleibt)', 'en': 'free delivery (service fee still applies)'}},
+    {'zh': '大件/冷链（≥15 kg、冷冻、整禽）', 'de': 'Großgebinde/Kühlkette (ab 15 kg, TK, ganze Tiere)', 'en': 'Bulk/cold chain (from 15 kg, frozen, whole birds)',
+     'v': {'zh': '+2 €', 'de': '+2 €', 'en': '+€2'}},
+    {'zh': '最低起拼', 'de': 'Mindestbestellwert', 'en': 'Minimum order',
+     'v': {'zh': '60 €', 'de': '60 €', 'en': '€60'}},
 ]
 
 

@@ -54,10 +54,13 @@
     "count_items": { "zh": "{n} 样", "de": "{n} Positionen", "en": "{n} items" },
     "page_discounts": { "zh": "本周特价", "de": "Angebote", "en": "Offers" },
     "footer_contact": {
-      "zh": "拼单在小红书群，周日晚上 20:00 截单，周一傍晚 Ostbahnhof 附近自提，1 公里内送到家 3 €，自备冷藏袋。",
-      "de": "Bestellungen laufen über die Xiaohongshu-Gruppe. Schluss ist Sonntag 20:00, Abholung Montagabend nahe Ostbahnhof, Lieferung im 1-km-Umkreis 3 €. Kühltasche mitbringen.",
-      "en": "Orders go through the Xiaohongshu group. Cut-off Sunday 20:00, pickup Monday evening near Ostbahnhof, delivery within 1 km for €3. Bring a cool bag."
+      "zh": "拼单在小红书群，周日 20:00 截单。商品按当天小票 AA，一分不加价；服务费 2 €/单（跑腿费，自提也含）；自提在 Ostbahnhof 附近免费，配送 1 km 内 4 €、1–3 km 6 €、3–5 km 9 €，满 120 € 免配送费。自备冷藏袋。",
+      "de": "Bestellungen über die Xiaohongshu-Gruppe, Schluss Sonntag 20:00. Ware 1:1 nach Kassenbon, kein Aufschlag; Servicegebühr 2 € pro Bestellung; Abholung nahe Ostbahnhof kostenlos; Lieferung 4 € (bis 1 km), 6 € (1–3 km), 9 € (3–5 km), ab 120 € Warenwert lieferkostenfrei. Kühltasche mitbringen.",
+      "en": "Orders via the Xiaohongshu group, cut-off Sunday 20:00. Goods at cost (receipt, no markup); service fee €2 per order; pickup near Ostbahnhof free; delivery €4 (up to 1 km), €6 (1–3 km), €9 (3–5 km), free delivery from €120 basket. Bring a cool bag."
     },
+    "fee_title": { "zh": "费用一览", "de": "Kosten auf einen Blick", "en": "Costs at a glance" },
+    "fee_item": { "zh": "项目", "de": "Position", "en": "Item" },
+    "fee_amount": { "zh": "金额", "de": "Betrag", "en": "Amount" },
     "footer_disclaimer": {
       "zh": "私人拼单，跟 Hamberger Großmarkt GmbH 没有关系，也不是它的官方页面。卖不卖、什么价，以店里当天为准，只有持证商家能买。",
       "de": "Private Sammelbestellung, keine Verbindung zu Hamberger Großmarkt GmbH und keine offizielle Seite. Preise und Verfügbarkeit tagesaktuell im Markt; Verkauf nur an Gewerbetreibende.",
