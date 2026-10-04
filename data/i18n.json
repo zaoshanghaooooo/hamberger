@@ -1,7 +1,7 @@
 {
   "ui": {
     "site_title": { "zh": "慕尼黑 Hamberger 拼单", "de": "Hamberger Sammelbestellung München", "en": "Hamberger group buy, Munich" },
-    "tagline": { "zh": "每周的折扣册，加上我们自己列的必买清单", "de": "Der Prospekt der Woche – und was sich davon lohnt", "en": "This week's flyer, plus what's actually worth buying" },
+    "tagline": { "zh": "这周的折扣册，加上值得拼的那几样", "de": "Der Prospekt der Woche und was sich davon lohnt", "en": "This week's flyer, plus what's actually worth buying" },
     "market_line": { "zh": "Hamberger Großmarkt · Friedenstraße 16 · 81671 München（Ostbahnhof 后面）", "de": "Hamberger Großmarkt · Friedenstraße 16 · 81671 München", "en": "Hamberger Großmarkt · Friedenstraße 16 · 81671 München" },
     "valid_label": { "zh": "有效", "de": "Gültig", "en": "Valid" },
     "week_label": { "zh": "档期", "de": "Zeitraum", "en": "Period" },
@@ -11,9 +11,9 @@
     "nav_buylist": { "zh": "可购清单", "de": "Einkaufsliste", "en": "Buy list" },
     "nav_how": { "zh": "怎么拼", "de": "Ablauf", "en": "How it works" },
     "notice_net": {
-      "zh": "批发市场标的是净价，不含税。食品加 7%，饮料和非食品加 19%，这里的含税价是按这个估的，最后按当天小票算。",
-      "de": "Großmarktpreise sind netto. Auf Lebensmittel kommen 7 %, auf Getränke und Non-Food 19 % – die Schätzung hier ist nur ein Anhaltspunkt, abgerechnet wird nach Kassenbon.",
-      "en": "Wholesale prices are net. Add 7 % VAT on food, 19 % on drinks and non-food. The estimate here is indicative only — the receipt is what counts."
+      "zh": "批发市场挂的都是净价，不含税：食品加 7%，饮料和非食品加 19%。表里的含税价是按这个估的，最后以当天小票为准。",
+      "de": "Der Großmarkt zeigt Nettopreise ohne MwSt.: 7 % auf Lebensmittel, 19 % auf Getränke und Non-Food. Die Bruttopreise hier sind geschätzt, maßgeblich ist der Kassenbon.",
+      "en": "Wholesale prices are net, without VAT: 7 % on food, 19 % on drinks and non-food. The gross prices here are estimates — the receipt is what counts."
     },
     "notice_access": {
       "zh": "这市场只让有营业执照的餐饮和商家进，个人办不了卡。我们是有卡的朋友帮大家带，跟 Hamberger 官方没关系。",
@@ -22,9 +22,9 @@
     },
     "sec_discounts_title": { "zh": "本周特价（整本折扣册）", "de": "Angebote der Woche (kompletter Prospekt)", "en": "This week's offers (the whole flyer)" },
     "sec_discounts_intro": {
-      "zh": "这一周册子里的东西都在下面，按店里货架的顺序排。净价、含税估价、货号都写着，去店里可以直接报货号。点标题可以折叠。",
-      "de": "Alle Positionen aus dem aktuellen Prospekt, sortiert wie im Markt. Netto, Schätzung inkl. MwSt. und Artikelnummer stehen dabei – die Nummer kann man im Markt direkt nennen.",
-      "en": "Everything from this week's flyer, grouped the way the store is laid out. Net price, VAT estimate and article number included — you can quote the number in store."
+      "zh": "整本册子都在这，按店里货架的顺序排。净价、含税估价、货号都列了，去店里直接报货号就行。分类标题可以点开收起。",
+      "de": "Der ganze Prospekt, in Regal-Reihenfolge. Netto, geschätzt brutto und Artikelnummer stehen dabei, im Markt einfach die Nummer nennen. Kategorien lassen sich auf- und zuklappen.",
+      "en": "The whole flyer, in shelf order. Net price, VAT estimate and article number are listed — just quote the number in store. Categories expand and collapse."
     },
     "sec_highlight_title": { "zh": "这周重点看这几样", "de": "Das lohnt sich diese Woche", "en": "What stands out this week" },
     "sec_highlight_intro": {
@@ -34,9 +34,9 @@
     },
     "sec_buylist_title": { "zh": "可购清单", "de": "Einkaufsliste", "en": "Buy list" },
     "sec_buylist_intro": {
-      "zh": "这些是我们比对过德国超市之后的结论：要么根本买不到，要么贵得离谱。价格都是欧元。最后一组是「不用拼、超市买就行」，省得白占名额。",
-      "de": "Nach Vergleich mit deutschen Supermärkten: entweder dort gar nicht zu bekommen oder deutlich teurer. Preise in Euro. Die letzte Gruppe ist «nicht nötig – im Supermarkt günstiger».",
-      "en": "After comparing with German supermarkets: either unavailable there or clearly more expensive. Prices in EUR. The last group is “no need — cheaper in the supermarket”."
+      "zh": "下面这些是跟德国超市比过之后挑的：要么买不到，要么贵得离谱。最后一组是「不用拼，超市买就行」。",
+      "de": "Alles hier wurde gegen deutsche Supermärkte geprüft: entweder nicht zu bekommen oder unverhältnismäßig teuer. Die letzte Gruppe: einfach im Supermarkt mitnehmen.",
+      "en": "Everything here was checked against German supermarkets: either unavailable or absurdly expensive. The last group: just buy it in the supermarket."
     },
     "sec_how_title": { "zh": "怎么拼", "de": "So läuft's", "en": "How it works" },
     "col_item": { "zh": "东西", "de": "Artikel", "en": "Item" },
@@ -54,9 +54,9 @@
     "count_items": { "zh": "{n} 样", "de": "{n} Positionen", "en": "{n} items" },
     "page_discounts": { "zh": "本周特价", "de": "Angebote", "en": "Offers" },
     "footer_contact": {
-      "zh": "拼单在小红书群，周日 20:00 截单。商品按当天小票 AA，一分不加价；服务费 2 €/单（跑腿费，自提也含）；自提在 Ostbahnhof 附近免费，配送 1 km 内 4 €、1–3 km 6 €、3–5 km 9 €，满 120 € 免配送费。自备冷藏袋。",
-      "de": "Bestellungen über die Xiaohongshu-Gruppe, Schluss Sonntag 20:00. Ware 1:1 nach Kassenbon, kein Aufschlag; Servicegebühr 2 € pro Bestellung; Abholung nahe Ostbahnhof kostenlos; Lieferung 4 € (bis 1 km), 6 € (1–3 km), 9 € (3–5 km), ab 120 € Warenwert lieferkostenfrei. Kühltasche mitbringen.",
-      "en": "Orders via the Xiaohongshu group, cut-off Sunday 20:00. Goods at cost (receipt, no markup); service fee €2 per order; pickup near Ostbahnhof free; delivery €4 (up to 1 km), €6 (1–3 km), €9 (3–5 km), free delivery from €120 basket. Bring a cool bag."
+      "zh": "拼单在小红书群，周日 20:00 截单。商品按当天小票 AA，不加价；服务费 2 €/单，自提和配送都一样；配送另收 1 km 内 4 €、1–3 km 6 €、3–5 km 9 €。自备冷藏袋。",
+      "de": "Bestellungen über die Xiaohongshu-Gruppe, Schluss Sonntag 20:00. Ware 1:1 nach Kassenbon, kein Aufschlag; Servicegebühr 2 € pro Bestellung, bei Abholung wie bei Lieferung; Lieferung zusätzlich 4 € (bis 1 km), 6 € (1–3 km), 9 € (3–5 km). Kühltasche mitbringen.",
+      "en": "Orders via the Xiaohongshu group, cut-off Sunday 20:00. Goods at cost, no markup; service fee €2 per order, same for pickup and delivery; delivery adds €4 (up to 1 km), €6 (1–3 km), €9 (3–5 km). Bring a cool bag."
     },
     "fee_title": { "zh": "费用一览", "de": "Kosten auf einen Blick", "en": "Costs at a glance" },
     "fee_item": { "zh": "项目", "de": "Position", "en": "Item" },

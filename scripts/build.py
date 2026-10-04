@@ -98,12 +98,17 @@ def coverage(text):
 
 
 def _tidy(out):
-    """收拾译文里残留的德语连接词、连字符和孤立字母"""
+    """收拾译文里残留的德语连接词、连字符、孤立字母和逐词替换留下的空格"""
     out = re.sub(r'(?<=[\u4e00-\u9fff])[\s\-]*\bund\b[\s\-]*(?=[\u4e00-\u9fff])', '', out)
     out = re.sub(r'(?<=[\u4e00-\u9fff])[\s\-]*&[\s\-]*(?=[\u4e00-\u9fff])', '和', out)
     out = re.sub(r'(?<=[\u4e00-\u9fff])[\s]*-[\s]*(?=[\u4e00-\u9fff])', '', out)
     out = re.sub(r'(?<=[\u4e00-\u9fff])-(?=[\u4e00-\u9fff])', '', out)
     out = re.sub(r'\b[A-Za-zÄÖÜäöüß]{1,2}[\'’](?=[\u4e00-\u9fff])', '', out)
+    # 中文之间的空格：甜 烧烤 酱 → 甜烧烤酱
+    out = re.sub(r'(?<=[\u4e00-\u9fff])[ \t]+(?=[\u4e00-\u9fff])', '', out)
+    # 中文与中文标点之间的空格
+    out = re.sub(r'(?<=[\u4e00-\u9fff])[ \t]+(?=[，。、；：）】」])', '', out)
+    out = re.sub(r'(?<=[（【「])[ \t]+(?=[\u4e00-\u9fff])', '', out)
     out = re.sub(r'\s{2,}', ' ', out)
     return out.strip(' ,·/-–—„“”"\'')
 
@@ -567,15 +572,15 @@ HOW_LINES = [
     {'zh': '商品结算：按当天小票 AA，一分不加价（食品 7%、饮料与非食品 19% 的税已经打在小票里）。',
      'de': 'Ware: 1:1 nach Kassenbon, kein Aufschlag (7 % auf Lebensmittel, 19 % auf Getränke und Non-Food stehen bereits auf dem Bon).',
      'en': 'Goods: split the receipt exactly, no markup (7 % VAT on food, 19 % on drinks and non-food is already on the receipt).'},
-    {'zh': '服务费：2 €/单，自提也含。这是跑腿费，不是商品加价——REWE 自提低于 70 € 也收 2 € 服务费。',
-     'de': 'Servicegebühr: 2 € pro Bestellung, auch bei Abholung. Das ist die Botengebühr, kein Warenaufschlag – REWE verlangt beim Abholservice unter 70 € ebenfalls 2 €.',
-     'en': 'Service fee: €2 per order, including pickup. That is the runner fee, not a markup on goods — REWE also charges €2 for pickup orders under €70.'},
-    {'zh': '自提：Ostbahnhof 附近免费，周一傍晚 18:00–20:00（时间以群内通知为准）。',
-     'de': 'Abholung: nahe Ostbahnhof kostenlos, Montagabend 18:00–20:00 (genaue Zeit laut Gruppe).',
-     'en': 'Pickup: free near Ostbahnhof, Monday evening 18:00–20:00 (exact time announced in the group).'},
-    {'zh': '配送：1 km 内 +4 €、1–3 km +6 €、3–5 km +9 €；满 120 € 免配送费。配送统一在周一。',
-     'de': 'Lieferung: +4 € (bis 1 km), +6 € (1–3 km), +9 € (3–5 km); ab 120 € Warenwert lieferkostenfrei. Lieferung nur montags.',
-     'en': 'Delivery: +€4 (up to 1 km), +€6 (1–3 km), +€9 (3–5 km); free from a €120 basket. Delivery on Mondays only.'},
+    {'zh': '服务费：2 €/单，自提和配送都一样。这是跑腿费，不是给商品加价。',
+     'de': 'Servicegebühr: 2 € pro Bestellung, bei Abholung wie bei Lieferung. Das ist die Botengebühr, kein Aufschlag auf die Ware.',
+     'en': 'Service fee: €2 per order, same for pickup and delivery. That is the runner fee, not a markup on goods.'},
+    {'zh': '自提：Ostbahnhof 附近，周一傍晚 18:00–20:00（以群内通知为准）。只收服务费，没有配送费。',
+     'de': 'Abholung: nahe Ostbahnhof, Montagabend 18:00–20:00 (genaue Zeit laut Gruppe). Nur Servicegebühr, keine Liefergebühr.',
+     'en': 'Pickup: near Ostbahnhof, Monday evening 18:00–20:00 (exact time announced in the group). Service fee only, no delivery fee.'},
+    {'zh': '配送：1 km 内 +4 €、1–3 km +6 €、3–5 km +9 €，在服务费之外另收。配送统一在周一。',
+     'de': 'Lieferung: +4 € (bis 1 km), +6 € (1–3 km), +9 € (3–5 km), zusätzlich zur Servicegebühr. Lieferung nur montags.',
+     'en': 'Delivery: +€4 (up to 1 km), +€6 (1–3 km), +€9 (3–5 km), on top of the service fee. Delivery on Mondays only.'},
     {'zh': '大件与冷链：整箱 ≥15 kg、冷冻品、整禽，另加 2 €。请自备冷藏袋。',
      'de': 'Großgebinde und Kühlkette: Kisten ab 15 kg, TK-Ware, ganze Tiere +2 €. Kühltasche mitbringen.',
      'en': 'Bulk and cold chain: crates from 15 kg, frozen goods, whole birds +€2. Bring a cool bag.'},
@@ -587,14 +592,12 @@ HOW_LINES = [
 FEE_ROWS = [
     {'zh': '商品', 'de': 'Ware', 'en': 'Goods',
      'v': {'zh': '按当天小票 AA，不加价', 'de': '1:1 nach Kassenbon, kein Aufschlag', 'en': 'At cost, split by receipt, no markup'}},
-    {'zh': '服务费', 'de': 'Servicegebühr', 'en': 'Service fee',
-     'v': {'zh': '2 €/单（自提也含）', 'de': '2 € pro Bestellung (auch Abholung)', 'en': '€2 per order (pickup included)'}},
+    {'zh': '服务费（自提、配送都一样）', 'de': 'Servicegebühr (Abholung wie Lieferung)', 'en': 'Service fee (pickup and delivery alike)',
+     'v': {'zh': '2 €/单', 'de': '2 € pro Bestellung', 'en': '€2 per order'}},
     {'zh': '自提（Ostbahnhof 附近）', 'de': 'Abholung nahe Ostbahnhof', 'en': 'Pickup near Ostbahnhof',
-     'v': {'zh': '0 €', 'de': '0 €', 'en': '€0'}},
+     'v': {'zh': '不加配送费，只收上面的服务费', 'de': 'keine Liefergebühr, nur die Servicegebühr', 'en': 'no delivery fee, only the service fee'}},
     {'zh': '配送 1 km 内 / 1–3 km / 3–5 km', 'de': 'Lieferung bis 1 km / 1–3 km / 3–5 km', 'en': 'Delivery up to 1 km / 1–3 km / 3–5 km',
      'v': {'zh': '+4 € / +6 € / +9 €', 'de': '+4 € / +6 € / +9 €', 'en': '+€4 / +€6 / +€9'}},
-    {'zh': '满 120 €', 'de': 'ab 120 € Warenwert', 'en': 'From a €120 basket',
-     'v': {'zh': '免配送费（服务费照收）', 'de': 'lieferkostenfrei (Servicegebühr bleibt)', 'en': 'free delivery (service fee still applies)'}},
     {'zh': '大件/冷链（≥15 kg、冷冻、整禽）', 'de': 'Großgebinde/Kühlkette (ab 15 kg, TK, ganze Tiere)', 'en': 'Bulk/cold chain (from 15 kg, frozen, whole birds)',
      'v': {'zh': '+2 €', 'de': '+2 €', 'en': '+€2'}},
     {'zh': '最低起拼', 'de': 'Mindestbestellwert', 'en': 'Minimum order',

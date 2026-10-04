@@ -7,7 +7,7 @@
   },
   "groups": [
     {
-      "name": { "zh": "亚洲货（本期册子，有货号）", "de": "Asien-Ware (aktueller Prospekt, mit Art.Nr)", "en": "Asian goods (current flyer, with art. no.)" },
+      "name": { "zh": "亚洲货（有货号）", "de": "Asien-Ware (mit Art.Nr)", "en": "Asian goods (with art. no.)" },
       "note": {
         "zh": "都来自 p25「IN ASIA-STYLE」页，走德国亚洲食品进口商 Heuschen & Schrouff 这条线。",
         "de": "Alle von Seite 25 IN ASIA-STYLE, über den Asien-Importeur Heuschen & Schrouff.",
@@ -19,7 +19,7 @@
           "min": { "zh": "1 包（整箱 20 包可拼）", "de": "1 Packung (Kiste = 20)", "en": "1 pack (case of 20)" },
           "price": { "zh": "2,28 €/包", "de": "2,28 €/Packung", "en": "€2.28/pack" },
           "compare": { "zh": "德国超市无此品类；整箱单价最低", "de": "Im Supermarkt nicht erhältlich", "en": "Not stocked in supermarkets" },
-          "why": { "zh": "中式刚需，一期一价", "de": "Grundbedarf, Aktionspreis", "en": "Staple item, promo price" } },
+          "why": { "zh": "包馄饨、炸云吞都常用，这期价不错", "de": "Für Wan Tan und Frittiertes, guter Preis", "en": "For wontons and fried dumplings; good price" } },
         { "art": "217669", "name": { "zh": "刈包（荷叶饼）", "de": "Gua Bao Brötchen", "en": "Gua bao buns" },
           "spec": { "zh": "10 × 600 g", "de": "10 × 600 g", "en": "10 × 600 g" },
           "min": { "zh": "1 包", "de": "1 Packung", "en": "1 pack" },
@@ -270,7 +270,7 @@
           "min": { "zh": "1 罐 / 1 袋", "de": "1 Dose / 1 Sack", "en": "1 tin / 1 sack" },
           "price": { "zh": "4,68 €/罐；5,68 €/5 kg", "de": "4,68 €/Dose; 5,68 €/5 kg", "en": "€4.68/tin; €5.68/5 kg" },
           "compare": { "zh": "超市 400 g 罐折算单价贵 3–4 倍", "de": "Supermarkt 400-g-Dosen 3–4 mal teurer pro kg", "en": "Supermarket 400 g tins 3–4x pricier per kg" },
-          "why": { "zh": "做意面/披萨的家庭刚需，5 kg 面粉最划算", "de": "Für Pasta und Pizza, 5 kg Mehl top", "en": "For pasta and pizza; 5 kg flour is great value" } },
+          "why": { "zh": "做意面披萨常用，5 kg 面粉最划算", "de": "Für Pasta und Pizza, 5 kg Mehl top", "en": "For pasta and pizza; 5 kg flour is great value" } },
         { "art": "190539 / 190538 / 224599 / 224598", "name": { "zh": "橄榄油与橄榄：LAKUDIA 希腊特级初榨 5 L / Kalamata 橄榄 5,3 kg", "de": "Olivenöl & Oliven: LAKUDIA 5 L / Kalamata 5,3 kg", "en": "Olive oil & olives: LAKUDIA 5 L / Kalamata 5.3 kg" },
           "spec": { "zh": "4 × 5 L 桶；4 × 5,3 kg", "de": "4 × 5 L Kanister; 4 × 5,3 kg", "en": "4 × 5 L cans; 4 × 5.3 kg" },
           "min": { "zh": "1 桶（需拼）", "de": "1 Kanister (teilen)", "en": "1 can (share)" },
@@ -288,7 +288,7 @@
     {
       "name": { "zh": "餐饮耗材与设备（有货号）", "de": "Gastro-Verbrauchsmaterial & Geräte (mit Art.Nr)", "en": "Catering supplies & equipment (with art. no.)" },
       "note": {
-        "zh": "这一组是个人在慕尼黑最难拿到批发价的东西：本地包装批发商 BANDO 自述只做 B2B。",
+        "zh": "这一组是个人在慕尼黑最难拿到批发价的东西：本地包装批发商 BANDO 自己说只做 B2B。",
         "de": "Der Bereich, in dem Privatkunden sonst keinen Großhandelspreis bekommen – Verpackungsgroßhändler BANDO arbeitet laut eigener Angabe nur B2B.",
         "en": "Where private buyers normally cannot get wholesale pricing — packaging wholesaler BANDO states it is B2B only."
       },
@@ -298,7 +298,7 @@
           "min": { "zh": "1 箱（35–250 只）", "de": "1 Karton (35–250 Stück)", "en": "1 carton (35–250 pcs)" },
           "price": { "zh": "13,48 € / 5,78 € / 8,48 € / 5,38 €", "de": "13,48 € / 5,78 € / 8,48 € / 5,38 €", "en": "€13.48 / €5.78 / €8.48 / €5.38" },
           "compare": { "zh": "零售只能买小包，折算贵 2–3 倍", "de": "Im Einzelhandel nur Kleinpackungen, 2–3 mal teurer", "en": "Retail only small packs, 2–3x pricier" },
-          "why": { "zh": "摆摊/外卖/聚会刚需", "de": "Für Imbiss, Lieferung, Feste", "en": "For stalls, delivery, parties" } },
+          "why": { "zh": "摆摊、外卖、聚会都用得上", "de": "Für Imbiss, Lieferung, Feste", "en": "For stalls, delivery, parties" } },
         { "art": "608128 / 606290", "name": { "zh": "餐巾 5 × 250 张 / 桌布卷 1,18 × 40 m", "de": "Servietten 5 × 250 / Tischdeckenrolle 1,18 × 40 m", "en": "Napkins 5 × 250 / table cover roll 1.18 × 40 m" },
           "spec": { "zh": "3 层 40 × 40 cm；40 m 卷", "de": "3-lagig 40 × 40 cm; 40-m-Rolle", "en": "3-ply 40 × 40 cm; 40 m roll" },
           "min": { "zh": "1 包 / 1 卷", "de": "1 Packung / 1 Rolle", "en": "1 pack / 1 roll" },
@@ -316,7 +316,7 @@
           "min": { "zh": "1 袋", "de": "1 Sack", "en": "1 sack" },
           "price": { "zh": "19,98 €/袋 约 1,33 €/kg", "de": "19,98 €/Sack etwa 1,33 €/kg", "en": "€19.98/sack about €1.33/kg" },
           "compare": { "zh": "超市 3 kg 小袋折算 2,5–4 €/kg", "de": "Supermarkt 3-kg-Säcke 2,5–4 €/kg", "en": "Supermarket 3 kg bags €2.5–4/kg" },
-          "why": { "zh": "烧烤季刚需，15 kg 便宜一半", "de": "Für die Grillsaison, halber Preis", "en": "Grilling season; about half price" } },
+          "why": { "zh": "烧烤季囤一袋，比超市小袋便宜一半", "de": "Für die Grillsaison, halber Preis", "en": "Grilling season; about half price" } },
         { "art": "852345 / 852717 / 852718 / 852769", "name": { "zh": "厨房设备：真空机 / 电磁炉 / 绞肉机", "de": "Küchengeräte: Vakuumierer / Induktionsplatte / Fleischwolf", "en": "Kitchen gear: vacuum sealer / induction hob / meat grinder" },
           "spec": { "zh": "单台", "de": "pro Stück", "en": "per unit" },
           "min": { "zh": "1 台", "de": "1 Stück", "en": "1 unit" },
@@ -332,9 +332,9 @@
       ]
     },
     {
-      "name": { "zh": "官方点名、但不在本期册子里的", "de": "Offiziell genannt, aber nicht im aktuellen Prospekt", "en": "Named officially, not in the current flyer" },
+      "name": { "zh": "官方点名、但不在册子里的", "de": "Offiziell genannt, aber nicht im Prospekt", "en": "Named officially, not in the flyer" },
       "note": {
-        "zh": "这些是 Hamberger 官网自己写出来的具体品种或数字，有明确出处；但没有本周货号，只能现场问价。",
+        "zh": "这些是 Hamberger 官网自己写出来的具体品种或数字，都有出处；但没有本周货号，只能现场问价。",
         "de": "Konkrete Angaben von der Hamberger-Website – belegt, aber ohne aktuelle Artikelnummer. Nur auf Anfrage.",
         "en": "Specific claims from Hamberger's own site — documented, but without a current article number. Order on request."
       },
@@ -349,7 +349,7 @@
           "spec": { "zh": "按 kg / 按瓶", "de": "kg / Flasche", "en": "kg / bottle" },
           "min": { "zh": "现场询价", "de": "vor Ort erfragen", "en": "ask in store" },
           "price": { "zh": "未标价", "de": "kein Preis", "en": "no price" },
-          "compare": { "zh": "这是它相对 Metro 和超市最实在的护城河", "de": "Der eigentliche Vorteil gegenüber Metro und Supermarkt", "en": "The real edge over Metro and supermarkets" },
+          "compare": { "zh": "Metro 和超市都比不了这一条", "de": "Das kann Metro so nicht und der Supermarkt erst recht nicht", "en": "Neither Metro nor supermarkets come close here" },
           "why": { "zh": "来源：官网同一页的官方数字", "de": "Quelle: dieselbe offizielle Seite", "en": "Source: same official page" } },
         { "art": "—", "name": { "zh": "鱼类 220 种（季节性最多 270 种）", "de": "220 Fischarten (saisonal bis 270)", "en": "220 fish species (up to 270 in season)" },
           "spec": { "zh": "按 kg", "de": "pro kg", "en": "per kg" },
@@ -372,9 +372,9 @@
       ]
     },
     {
-      "name": { "zh": "已核实：之前写错、现在删掉的", "de": "Korrigiert: zuvor falsch, jetzt entfernt", "en": "Corrected: previously wrong, now removed" },
+      "name": { "zh": "已核实：之前写错的，删了", "de": "Korrigiert: zuvor falsch, jetzt entfernt", "en": "Corrected: previously wrong, now removed" },
       "note": {
-        "zh": "下面这些我原来凭「Hamberger 主打亚洲菜」推测写进了清单，两期册子里一条都没有，官网也没点名，所以删掉。如果你看到实拍或货号，告诉我我再加回来。",
+        "zh": "下面这些是我凭「他们主打亚洲菜」猜的，两期册子里一条都没有，官网也没点名，所以删了。你要是看到实拍或货号，告诉我我加回来。",
         "de": "Diese Positionen hatte ich aus dem Asien-Sortiment abgeleitet – in beiden Prospekten kommt keine davon vor, daher entfernt.",
         "en": "I had inferred these from the Asian range — none appear in either flyer, so they are removed."
       },
@@ -384,19 +384,19 @@
           "min": { "zh": "—", "de": "—", "en": "—" },
           "price": { "zh": "—", "de": "—", "en": "—" },
           "compare": { "zh": "两期册子的果蔬类里：KW41/42 只有 4 条（腌菜、玉米罐头、蔬菜丸、油浸番茄），KW39/40 只有 2 条调料", "de": "Gemüse-Positionen: KW41/42 nur 4, KW39/40 nur 2 Gewürze", "en": "Vegetable listings: KW41/42 only 4, KW39/40 only 2 seasonings" },
-          "why": { "zh": "结论：没有证据就不写。要买这些去亚超或土超", "de": "Fazit: keine Belege, nicht aufgeführt", "en": "Conclusion: no evidence, not listed" } },
+          "why": { "zh": "没证据就不写。要买去亚超或土超。", "de": "Keine Belege, also nicht aufgeführt", "en": "No evidence, so not listed" } },
         { "art": "—", "name": { "zh": "豆制品与干货：腐竹、豆腐皮、豆干、豆泡、绿豆芽、虾皮、银耳、莲子、百合、桂圆、干贝、白果、红枣、糯米粉", "de": "Tofu- und Trockenware: Tofuhaut, Tofubrot, Tofu-Puffs, Mungbohnensprossen, getrocknete Garnelen, Silberohr, Lotuskerne, Lilienknospen, Longan, Jakobsmuschel, Ginkgo, Jujube, Klebreismehl", "en": "Tofu and dried goods: yuba, dried tofu, tofu puffs, mung sprouts, dried shrimps, snow fungus, lotus seeds, lily buds, longan, scallops, ginkgo, jujube, glutinous rice flour" },
           "spec": { "zh": "—", "de": "—", "en": "—" },
           "min": { "zh": "—", "de": "—", "en": "—" },
           "price": { "zh": "—", "de": "—", "en": "—" },
           "compare": { "zh": "册子里没有任何豆制品或干货条目", "de": "Keine Position dieser Art in den Prospekten", "en": "No such items in the flyers" },
-          "why": { "zh": "同样证据不足，删除；这些去亚超买", "de": "Ebenfalls ohne Beleg, entfernt", "en": "Removed for lack of evidence" } },
+          "why": { "zh": "一样没证据，删了；去亚超买。", "de": "Ebenfalls ohne Beleg, entfernt", "en": "Removed for lack of evidence" } },
         { "art": "—", "name": { "zh": "活鲜（原来的笼统写法）", "de": "Lebendware als Sammelbegriff", "en": "Live seafood as a blanket term" },
           "spec": { "zh": "—", "de": "—", "en": "—" },
           "min": { "zh": "—", "de": "—", "en": "—" },
           "price": { "zh": "—", "de": "—", "en": "—" },
           "compare": { "zh": "改成上面那条：只写官方点名过的活鱼、帝王蟹、黄道蟹", "de": "Ersetzt durch die konkrete Angabe oben", "en": "Replaced by the specific entry above" },
-          "why": { "zh": "按你的要求：笼统的说法不写", "de": "Wie gewünscht: keine Sammelbegriffe", "en": "As requested: no blanket terms" } }
+          "why": { "zh": "笼统的说法不写。", "de": "Sammelbegriffe kommen hier nicht vor", "en": "No blanket terms" } }
       ]
     },
     {
